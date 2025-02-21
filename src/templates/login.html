@@ -3,10 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
+{% include "./nav.html" %}
 <h1>Login page</h1>
 
     <form action="/login" method="POST">
         {{ form.hidden_tag() }}
+        {% include "./flashed.html" %}
         <div>
             {{ form.email.label }}
             {{ form.email }}

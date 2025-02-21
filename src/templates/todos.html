@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+
+{% block title %}Todos{% endblock %}
+
+{% block body %} 
+{% include './nav.html' %}
+<h1>Login page</h1>
+<form>
+    <div>
+      {{form.title.label}}
+      {{form.title}}
+    </div>
+
+    <div>
+      {{ form.description.label}}
+      {{ form.description }}
+    </div>
+
+    {{ form.submit }}
+</form>
+{% endblock %}
