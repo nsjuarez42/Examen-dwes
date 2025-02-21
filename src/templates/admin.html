@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %} 
+<h1>Admin page</h1>
+
+<div>
+{% if users %}
+  {% for user in users%}
+     <div>
+        <span>Id: {{ user[0] }}</span>
+        <span>Name: {{ user[1] }}</span>
+     </div>
+  {% endfor %}
+{% endif %}
+</div>
+{% endblock %}

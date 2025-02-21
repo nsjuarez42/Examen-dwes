@@ -10,6 +10,13 @@ class User:
             return None
         cursor.close()
         return users[0]
+    
+    @classmethod
+    def get_all(cls,cursor):
+        cursor.execute("SELECT * FROM users")
+        users = cursor.fetchall()
+        cursor.close()
+        return users
 
     @classmethod
     def get_by_mail(cls,email,cursor):

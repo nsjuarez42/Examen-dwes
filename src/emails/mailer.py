@@ -1,5 +1,6 @@
 import smtplib,ssl
-
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 def send_mail(to,message):
     port = 465
 

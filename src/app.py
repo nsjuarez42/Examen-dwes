@@ -99,6 +99,14 @@ def todos():
         flash("Todo added successfully")
         return redirect(url_for("todos"))
     
+@app.route("/admin")
+@login_required
+def admin():
+    if current_user.username != "admin":
+        return redirect(url_for("todos"))
+    users = User.get_all(mysqlconn.get_db().cursor())
+    return render_template("admin.html",users=users)
+    
 @app.route("/signout",methods=["POST"])
 @login_required
 def logout():
