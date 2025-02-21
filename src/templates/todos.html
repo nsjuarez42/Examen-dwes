@@ -5,7 +5,9 @@
 {% block body %} 
 {% include './nav.html' %}
 <h1>Login page</h1>
-<form>
+<form action="/todos" method="POST">
+    {{ form.hidden_tag() }}
+    {% include "./flashed.html" %}
     <div>
       {{form.title.label}}
       {{form.title}}
@@ -18,4 +20,18 @@
 
     {{ form.submit }}
 </form>
+<div>
+{% if todos %}
+{% for todo in todos %}
+ <div>
+
+    <span>Title: {{ todo[1] }}</span>
+    <span>Description: {{ todo[2] }}</span>
+ </div>
+{% endfor %}
+{% else %}
+<span>No todos added yet</span>
+{% endif %}
+</div>
+
 {% endblock %}

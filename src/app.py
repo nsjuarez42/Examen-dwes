@@ -6,6 +6,7 @@ from forms.TodoForm import TodoForm
 from flask_login import current_user,LoginManager,login_user,login_required,logout_user
 from flaskext.mysql import MySQL
 from db.User import User
+from db.Todo import Todo
 from auth.UserAuth import UserAuth
 
 app = Flask(__name__)
@@ -82,12 +83,20 @@ def register():
 @login_required
 def todos():
     if request.method == "GET":
-        return render_template("todos.html",form=TodoForm())
+
+        print(current_user.id)
+        todos = Todo.get_by_user_id(current_user.id,mysqlconn.get_db().cursor())
+        return render_template("todos.html",form=TodoForm(),todos=todos)
 
     elif request.method == "POST": 
         title = request.form.get("title")
         description = request.form.get("description")
+        db = mysqlconn.get_db()
+        cursor = db.cursor()
+
+        Todo.insert(db,cursor,title,description,current_user.id)
         print("Received {} {}".format(title,description))
+        flash("Todo added successfully")
         return redirect(url_for("todos"))
     
 @app.route("/signout",methods=["POST"])
