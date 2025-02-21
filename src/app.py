@@ -106,6 +106,13 @@ def admin():
         return redirect(url_for("todos"))
     users = User.get_all(mysqlconn.get_db().cursor())
     return render_template("admin.html",users=users)
+
+@app.route("/todos/<id>")
+def delete(id):
+    db = mysqlconn.get_db()
+    Todo.delete_by_id(db,db.cursor(),id)
+    return redirect(url_for("todos"))
+
     
 @app.route("/signout",methods=["POST"])
 @login_required

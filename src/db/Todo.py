@@ -17,3 +17,9 @@ class Todo:
         except Exception as e:
             print(e)
         cursor.close()
+
+    @classmethod
+    def delete_by_id(cls,db,cursor,id):
+        cursor.execute("DELETE FROM todos WHERE id=%s",(id))
+        db.commit()
+        cursor.close()
